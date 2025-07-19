@@ -1,252 +1,318 @@
-# Vite Library Template
+# logger-ts
 
-A template repository for modern library development using Vite and TypeScript.
+[![npm version](https://badge.fury.io/js/@squilla%2Flogger-ts.svg)](https://www.npmjs.com/package/@squilla/logger-ts)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-## About this template
+A flexible and extensible logger library written in TypeScript. Supports configurable log levels, formatters, and transports.
 
-This template provides a complete setup for developing libraries using the following tech stack:
+## 🚀 Features
 
-- ⚡ **Vite**: Fast build and hot reload
-- 📘 **TypeScript**: Type-safe code development
-- 🧪 **Vitest**: Fast test execution
-- 📋 **ESLint**: Maintain code quality
-- 🎨 **Prettier**: Consistent code formatting
-- 📦 **Multiple formats**: Supports ESM, CommonJS, and UMD
-- 🔧 **VS Code settings**: Optimized development environment
+- ✅ **Configurable log levels**: DEBUG, INFO, WARN, ERROR
+- ✅ **Flexible formatters**: Default formatter and JSON formatter
+- ✅ **Multiple transports**: Supports console output
+- ✅ **Context information**: Log output with additional metadata
+- ✅ **Error handling**: Detailed information for error objects
+- ✅ **TypeScript support**: Full type safety
 
-## How to use this template
-
-### 1. Create a repository
-
-Create a repository using this template:
-
-1. Click the "Use this template" button on GitHub
-2. Enter a new repository name
-3. Create the repository
-
-Or use the CLI:
+## 📦 Installation
 
 ```bash
-# Using GitHub CLI
-gh repo create my-awesome-library --template username/vite-library-template
-
-# Clone manually
-git clone https://github.com/username/vite-library-template.git my-awesome-library
-cd my-awesome-library
+npm install @squilla/logger-ts
 ```
 
-### 2. Initial setup
+or
 
 ```bash
-# Install dependencies
-npm install
-
-# Update package information
-npm init
+yarn add @squilla/logger-ts
 ```
 
-### 3. Customize
+## 🔧 Basic Usage
 
-Edit the following files to customize for your library:
-
-#### `package.json`
-```json
-{
-  "name": "your-library-name",
-  "version": "1.0.0",
-  "description": "Description of your library",
-  "author": "Your Name <your.email@example.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/username/your-library-name.git"
-  },
-  "keywords": ["keyword1", "keyword2"]
-}
-```
-
-#### `vite.config.ts`
-```typescript
-export default defineConfig({
-  plugins: [
-    dts({
-      include: ['lib/**/*'],
-      // ...
-    })
-  ],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'lib/index.ts'),
-      name: 'YourLibraryName', // Update global name
-      fileName: (format) => `your-library-name.${format}.js` // Update file name
-    }
-  }
-})
-```
-
-#### `lib/index.ts`
-This file is the main entry point of your library. Export your features from here.
-
-### 4. Start development
-
-```bash
-# Start in development mode
-npm run dev
-
-# Run tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Build the library
-npm run build
-```
-
-## Directory structure
-
-```
-your-library/
-├── lib/                    # Source code
-│   ├── __tests__/          # Unit test code
-│   └── index.ts            # Main entry point
-├── dist/                   # Build output (auto-generated)
-├── .vscode/                # VS Code settings
-├── vite.config.ts          # Vite config
-├── vitest.config.ts        # Vitest config
-├── tsconfig.json           # TypeScript config
-├── .eslintrc.js            # ESLint config
-├── .prettierrc             # Prettier config
-├── package.json            # Package config
-└── README.md               # Documentation
-```
-
-## Available scripts
-
-```bash
-# Build the library
-npm run build
-
-# Run tests
-npm run test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with UI
-npm run test:ui
-
-# Lint code
-npm run lint
-
-# Fix linting issues
-npm run lint:fix
-
-# Format code
-npm run format
-
-# Type check
-npm run type-check
-
-# Generate HTML documentation
-npm run docs
-
-# Generate Markdown documentation
-npm run docs:markdown
-
-# Check locally
-npm run docs:serve
-```
-
-## Development workflow
-
-1. **Feature development**: Implement features in the `lib/` directory
-2. **Create tests**: Create corresponding test files
-3. **Type definitions**: Update `lib/types.ts` as needed
-4. **Build check**: Ensure no build errors with `npm run build`
-5. **Run tests**: Ensure all tests pass with `npm run test`
-
-## Publishing the library
-
-### 1. Prepare the package
-
-```bash
-# Build the library
-npm run build
-
-# Run tests
-npm run test
-
-# Run lint
-npm run lint
-```
-
-### 2. Version management
-
-```bash
-# Bump patch version
-npm version patch
-
-# Bump minor version
-npm version minor
-
-# Bump major version
-npm version major
-```
-
-### 3. Publish
-
-```bash
-# Publish to npm
-npm publish
-
-# For scoped packages
-npm publish --access public
-```
-
-## Customization examples
-
-### For React libraries
-
-Add `peerDependencies` to `package.json`:
-
-```json
-{
-  "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  }
-}
-```
-
-### For Vue libraries
-
-Update `vite.config.ts`:
+### Simple Example
 
 ```typescript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { LoggerFactory } from '@squilla/logger-ts';
 
-export default defineConfig({
-  plugins: [vue(), dts()],
-  // ...
-})
+// Create a logger with default settings
+const logger = LoggerFactory.createLogger();
+
+// Output logs
+logger.debug('Debug message');
+logger.info('Info message');
+logger.warn('Warning message');
+logger.error('Error message');
 ```
 
-### For Node.js libraries
+### Custom Settings
 
-Update `package.json`:
+```typescript
+import { LoggerFactory, LogLevel, JSONFormatter } from '@squilla/logger-ts';
 
+// Create a logger with custom settings
+const logger = LoggerFactory.createLogger({
+  level: LogLevel.DEBUG,
+  format: new JSONFormatter(true), // pretty-print JSON
+});
+
+logger.info('Log message with custom settings');
+```
+
+## ⚙️ Configuration Options
+
+### Log Levels
+
+| Level   | Value | Description             |
+| ------- | ----- | ----------------------- |
+| `DEBUG` | 0     | Debug information (dev) |
+| `INFO`  | 1     | General information     |
+| `WARN`  | 2     | Warning messages        |
+| `ERROR` | 3     | Error messages          |
+
+> [!NOTE]
+> When you set a log level, only logs at that level or higher will be output. For example, if set to `LogLevel.WARN`, only WARN and ERROR logs will be output.
+
+### Formatters
+
+#### DefaultFormatter
+
+Outputs logs in a human-readable format.
+
+```typescript
+import { LoggerFactory, DefaultFormatter } from '@squilla/logger-ts';
+
+const logger = LoggerFactory.createLogger({
+  format: new DefaultFormatter()
+});
+```
+
+**Example output:**
+```
+[INFO] 2024-01-15T10:30:45.123Z Application started
+```
+
+#### JSONFormatter
+
+Outputs logs in JSON format.
+
+```typescript
+import { LoggerFactory, JSONFormatter } from '@squilla/logger-ts';
+
+// Compact JSON
+const logger1 = LoggerFactory.createLogger({
+  format: new JSONFormatter(false)
+});
+
+// Pretty-print JSON
+const logger2 = LoggerFactory.createLogger({
+  format: new JSONFormatter(true)
+});
+```
+
+**Example output:**
 ```json
 {
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "level": "INFO",
+  "timestamp": "2024-01-15T10:30:45.123Z",
+  "message": "Application started"
 }
 ```
 
-## Update README.md
+### Transports
 
-Once your library is complete, replace this README.md with the actual documentation for your library.
+#### ConsoleTransport (default)
+
+Outputs logs to standard output.
+
+```typescript
+import { LoggerFactory, ConsoleTransport } from '@squilla/logger-ts';
+
+const logger = LoggerFactory.createLogger({
+  transport: new ConsoleTransport()
+});
+```
+
+## 🎯 Advanced Usage
+
+### Context Information
+
+You can add context information to logs.
+
+```typescript
+const logger = LoggerFactory.createLogger();
+
+// Add context to individual logs
+logger.info('User logged in', { 
+  userId: 12345, 
+  ip: '192.168.1.1' 
+});
+
+// Set default context when creating the logger
+const contextLogger = LoggerFactory.createLogger({
+  context: { 
+    service: 'user-service',
+    version: '1.0.0' 
+  }
+});
+```
+
+### Error Logs
+
+You can output logs that include error objects.
+
+```typescript
+const logger = LoggerFactory.createLogger();
+
+try {
+  // Some process
+  throw new Error('Database connection error');
+} catch (error) {
+  logger.error('An error occurred during processing', { 
+    operation: 'database-connection' 
+  }, error);
+}
+```
+
+> [!TIP]
+> For DEBUG level, the full stack trace is output. For other levels, only the error name and message are output.
+
+### Using the Logger Class Directly
+
+```typescript
+import { Logger, LogLevel, DefaultFormatter, ConsoleTransport } from '@squilla/logger-ts';
+
+const logger = new Logger({
+  level: LogLevel.INFO,
+  format: new DefaultFormatter(),
+  transport: new ConsoleTransport()
+});
+
+logger.info('Logger created directly');
+```
+
+## 🛠️ Customization
+
+### Creating a Custom Formatter
+
+You can also create your own formatter.
+
+```typescript
+import { LogFormatter, LogEntry, LogLevel } from '@squilla/logger-ts';
+
+class CustomFormatter implements LogFormatter {
+  format(entry: LogEntry): string {
+    const level = LogLevel[entry.level];
+    const time = entry.timestamp.toLocaleString('ja-JP');
+    return `${time} [${level}] ${entry.message}`;
+  }
+}
+
+const logger = LoggerFactory.createLogger({
+  format: new CustomFormatter()
+});
+```
+
+### Creating a Custom Transport
+
+You can also create your own transport.
+
+```typescript
+import { LogTransport, LogLevel } from '@squilla/logger-ts';
+
+class FileTransport implements LogTransport {
+  constructor(private filename: string) {}
+
+  log(formattedMessage: string, level: LogLevel): void {
+    // Write to file
+    console.log(`Writing to file ${this.filename}: ${formattedMessage}`);
+  }
+}
+
+const logger = LoggerFactory.createLogger({
+  transport: new FileTransport('app.log')
+});
+```
+
+## 📚 API Reference
+
+### LoggerFactory
+
+#### `createLogger(config?: Partial<LoggerConfig>): Logger`
+
+Creates a logger instance.
+
+**Parameters:**
+- `config` (optional): Logger settings (partial settings allowed)
+
+### Logger
+
+#### `debug(message: string, context?: Record<string, unknown>): void`
+
+Outputs a DEBUG level log.
+
+#### `info(message: string, context?: Record<string, unknown>): void`
+
+Outputs an INFO level log.
+
+#### `warn(message: string, context?: Record<string, unknown>): void`
+
+Outputs a WARN level log.
+
+#### `error(message: string, context?: Record<string, unknown>, error?: Error): void`
+
+Outputs an ERROR level log.
+
+### Configuration Interfaces
+
+#### `LoggerConfig`
+
+```typescript
+interface LoggerConfig {
+  level: LogLevel;
+  format?: LogFormatter;
+  transport?: LogTransport;
+  context?: Record<string, unknown>;
+}
+```
+
+#### `LogEntry`
+
+```typescript
+interface LogEntry {
+  level: LogLevel;
+  timestamp: Date;
+  message: string;
+  context?: Record<string, unknown>;
+  error?: Error;
+}
+```
+
+## 💡 Best Practices
+
+> [!IMPORTANT]
+> Following these best practices enables effective log management.
+
+1. **Use appropriate log levels**
+   - `DEBUG`: Detailed information for development
+   - `INFO`: General information and application state
+   - `WARN`: Matters to be aware of (not errors but noteworthy)
+   - `ERROR`: Problems and errors
+
+2. **Utilize context information**
+   - Include relevant information for traceability
+   - Record user IDs, request IDs, operation names, etc.
+
+3. **Settings for production**
+   - Set an appropriate log level for production (usually INFO or higher)
+   - Be careful not to include sensitive information in logs
+
+4. **Record error information**
+   - Appropriately record error objects in try-catch blocks
+   - Record error details along with context
+
+> [!WARNING]
+> In production, be very careful not to include sensitive information (passwords, API keys, personal information, etc.) in logs.
+
+## 📄 License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
