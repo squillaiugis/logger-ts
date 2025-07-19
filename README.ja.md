@@ -1,252 +1,318 @@
-# Vite Library Template
+# logger-ts
 
-ViteとTypeScriptを使用したモダンなライブラリ開発のためのテンプレートリポジトリです。
+[![npm version](https://badge.fury.io/js/@squilla%2Flogger-ts.svg)](https://www.npmjs.com/package/@squilla/logger-ts)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-## このテンプレートについて
+TypeScriptで書かれた柔軟で拡張可能なロガーライブラリです。設定可能なログレベル、フォーマッター、トランスポートをサポートしています。
 
-このテンプレートは以下の技術スタックを使用してライブラリを開発するための完全なセットアップを提供します：
+## 🚀 特徴
 
-- ⚡ **Vite**: 高速なビルドとホットリロード
-- 📘 **TypeScript**: 型安全なコード開発
-- 🧪 **Vitest**: 高速なテスト実行
-- 📋 **ESLint**: コード品質の維持
-- 🎨 **Prettier**: 統一されたコードフォーマット
-- 📦 **複数フォーマット**: ESM、CommonJS、UMD対応
-- 🔧 **VS Code設定**: 最適化された開発環境
+- ✅ **設定可能なログレベル**: DEBUG、INFO、WARN、ERROR
+- ✅ **柔軟なフォーマッター**: デフォルトフォーマッターとJSONフォーマッター
+- ✅ **複数のトランスポート**: コンソール出力に対応
+- ✅ **コンテキスト情報**: 追加のメタデータを含むログ出力
+- ✅ **エラー処理**: エラーオブジェクトの詳細な情報を記録
+- ✅ **TypeScript対応**: 完全な型安全性
 
-## テンプレートの使用方法
-
-### 1. リポジトリの作成
-
-このテンプレートを使用してリポジトリを作成します：
-
-1. GitHubで「Use this template」ボタンをクリック
-2. 新しいリポジトリ名を入力
-3. リポジトリを作成
-
-または、CLIを使用：
+## 📦 インストール
 
 ```bash
-# GitHub CLIを使用
-gh repo create my-awesome-library --template username/vite-library-template
-
-# 手動でクローン
-git clone https://github.com/username/vite-library-template.git my-awesome-library
-cd my-awesome-library
+npm install @squilla/logger-ts
 ```
 
-### 2. 初期設定
+または
 
 ```bash
-# 依存関係をインストール
-npm install
-
-# パッケージ情報を更新
-npm init
+yarn add @squilla/logger-ts
 ```
 
-### 3. カスタマイズ
+## 🔧 基本的な使用方法
 
-以下のファイルを編集して、あなたのライブラリに合わせてカスタマイズします：
-
-#### `package.json`
-```json
-{
-  "name": "your-library-name",
-  "version": "1.0.0",
-  "description": "あなたのライブラリの説明",
-  "author": "Your Name <your.email@example.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/username/your-library-name.git"
-  },
-  "keywords": ["keyword1", "keyword2"]
-}
-```
-
-#### `vite.config.ts`
-```typescript
-export default defineConfig({
-  plugins: [
-    dts({
-      include: ['lib/**/*'],
-      // ...
-    })
-  ],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'lib/index.ts'),
-      name: 'YourLibraryName', // グローバル名を更新
-      fileName: (format) => `your-library-name.${format}.js` // ファイル名を更新
-    }
-  }
-})
-```
-
-#### `lib/index.ts`
-このファイルがライブラリのメインエントリーポイントです。あなたの機能をここからエクスポートします。
-
-### 4. 開発開始
-
-```bash
-# 開発モードで起動
-npm run dev
-
-# テストを実行
-npm run test
-
-# テストをウォッチモードで実行
-npm run test:watch
-
-# ビルドを実行
-npm run build
-```
-
-## ディレクトリ構造
-
-```
-your-library/
-├── lib/                    # ソースコード
-│   ├── __tests__/          # 単体テストコード
-│   └── index.ts            # メインエントリーポイント
-├── dist/                   # ビルド出力（自動生成）
-├── .vscode/                # VS Code設定
-├── vite.config.ts          # Vite設定
-├── vitest.config.ts        # Vitest設定
-├── tsconfig.json           # TypeScript設定
-├── .eslintrc.js            # ESLint設定
-├── .prettierrc             # Prettier設定
-├── package.json            # パッケージ設定
-└── README.md               # ドキュメント
-```
-
-## 利用可能なスクリプト
-
-```bash
-# ライブラリをビルド
-npm run build
-
-# テストを実行
-npm run test
-
-# カバレッジ付きでテストを実行
-npm run test:coverage
-
-# ウォッチモードでテストを実行
-npm run test:watch
-
-# UIでテストを実行
-npm run test:ui
-
-# コードをリント
-npm run lint
-
-# リンティング問題を修正
-npm run lint:fix
-
-# コードをフォーマット
-npm run format
-
-# 型チェック
-npm run type-check
-
-# HTMLドキュメントを生成
-npm run docs
-
-# マークダウンドキュメントを生成
-npm run docs:markdown
-
-# ローカルサーバーで確認
-npm run docs:serve
-```
-
-## 開発ワークフロー
-
-1. **機能開発**: `lib/` ディレクトリに機能を実装
-2. **テスト作成**: 対応するテストファイルを作成
-3. **型定義**: 必要に応じて `lib/types.ts` を更新
-4. **ビルド確認**: `npm run build` でビルドエラーがないことを確認
-5. **テスト実行**: `npm run test` ですべてのテストが通ることを確認
-
-## ライブラリの公開
-
-### 1. パッケージの準備
-
-```bash
-# ビルドを実行
-npm run build
-
-# テストを実行
-npm run test
-
-# リンティングを実行
-npm run lint
-```
-
-### 2. バージョン管理
-
-```bash
-# パッチバージョンを上げる
-npm version patch
-
-# マイナーバージョンを上げる
-npm version minor
-
-# メジャーバージョンを上げる
-npm version major
-```
-
-### 3. 公開
-
-```bash
-# npmに公開
-npm publish
-
-# スコープ付きパッケージの場合
-npm publish --access public
-```
-
-## カスタマイズ例
-
-### React用ライブラリの場合
-
-`package.json`の`peerDependencies`を追加：
-
-```json
-{
-  "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  }
-}
-```
-
-### Vue用ライブラリの場合
-
-`vite.config.ts`を更新：
+### 簡単な使用例
 
 ```typescript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { LoggerFactory } from '@squilla/logger-ts';
 
-export default defineConfig({
-  plugins: [vue(), dts()],
-  // ...
-})
+// デフォルト設定でロガーを作成
+const logger = LoggerFactory.createLogger();
+
+// ログを出力
+logger.debug('デバッグメッセージ');
+logger.info('情報メッセージ');
+logger.warn('警告メッセージ');
+logger.error('エラーメッセージ');
 ```
 
-### Node.js用ライブラリの場合
+### カスタム設定
 
-`package.json`を更新：
+```typescript
+import { LoggerFactory, LogLevel, JSONFormatter } from '@squilla/logger-ts';
 
+// カスタム設定でロガーを作成
+const logger = LoggerFactory.createLogger({
+  level: LogLevel.DEBUG,
+  format: new JSONFormatter(true), // pretty-print JSON
+});
+
+logger.info('カスタム設定のログメッセージ');
+```
+
+## ⚙️ 設定オプション
+
+### ログレベル
+
+| レベル  | 数値 | 説明                   |
+| ------- | ---- | ---------------------- |
+| `DEBUG` | 0    | デバッグ情報（開発用） |
+| `INFO`  | 1    | 一般的な情報           |
+| `WARN`  | 2    | 警告メッセージ         |
+| `ERROR` | 3    | エラーメッセージ       |
+
+> [!NOTE]
+> ログレベルを設定すると、そのレベル以上のログのみが出力されます。例えば、`LogLevel.WARN`に設定すると、WARNとERRORレベルのログのみが出力されます。
+
+### フォーマッター
+
+#### DefaultFormatter（デフォルト）
+
+人間が読みやすい形式でログを出力します。
+
+```typescript
+import { LoggerFactory, DefaultFormatter } from '@squilla/logger-ts';
+
+const logger = LoggerFactory.createLogger({
+  format: new DefaultFormatter()
+});
+```
+
+**出力例:**
+```
+[INFO] 2024-01-15T10:30:45.123Z アプリケーションが開始されました
+```
+
+#### JSONFormatter
+
+JSON形式でログを出力します。
+
+```typescript
+import { LoggerFactory, JSONFormatter } from '@squilla/logger-ts';
+
+// コンパクトJSON
+const logger1 = LoggerFactory.createLogger({
+  format: new JSONFormatter(false)
+});
+
+// Pretty-print JSON
+const logger2 = LoggerFactory.createLogger({
+  format: new JSONFormatter(true)
+});
+```
+
+**出力例:**
 ```json
 {
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "level": "INFO",
+  "timestamp": "2024-01-15T10:30:45.123Z",
+  "message": "アプリケーションが開始されました"
 }
 ```
 
-## README.md の更新
+### トランスポート
 
-ライブラリが完成したら、このREADME.mdを実際のライブラリのドキュメントに置き換えてください。
+#### ConsoleTransport（デフォルト）
+
+標準出力にログを出力します。
+
+```typescript
+import { LoggerFactory, ConsoleTransport } from '@squilla/logger-ts';
+
+const logger = LoggerFactory.createLogger({
+  transport: new ConsoleTransport()
+});
+```
+
+## 🎯 高度な使用方法
+
+### コンテキスト情報
+
+ログにコンテキスト情報を追加できます。
+
+```typescript
+const logger = LoggerFactory.createLogger();
+
+// 個別のログにコンテキストを追加
+logger.info('ユーザーがログインしました', { 
+  userId: 12345, 
+  ip: '192.168.1.1' 
+});
+
+// ロガー作成時にデフォルトコンテキストを設定
+const contextLogger = LoggerFactory.createLogger({
+  context: { 
+    service: 'user-service',
+    version: '1.0.0' 
+  }
+});
+```
+
+### エラーログ
+
+エラーオブジェクトを含むログを出力できます。
+
+```typescript
+const logger = LoggerFactory.createLogger();
+
+try {
+  // 何らかの処理
+  throw new Error('データベース接続エラー');
+} catch (error) {
+  logger.error('処理中にエラーが発生しました', { 
+    operation: 'database-connection' 
+  }, error);
+}
+```
+
+> [!TIP]
+> DEBUGレベルの場合、完全なスタックトレースが出力されます。その他のレベルでは、エラー名とメッセージのみが出力されます。
+
+### 直接Loggerクラスを使用
+
+```typescript
+import { Logger, LogLevel, DefaultFormatter, ConsoleTransport } from '@squilla/logger-ts';
+
+const logger = new Logger({
+  level: LogLevel.INFO,
+  format: new DefaultFormatter(),
+  transport: new ConsoleTransport()
+});
+
+logger.info('直接作成したロガー');
+```
+
+## 🛠️ カスタマイズ
+
+### カスタムフォーマッターの作成
+
+独自のフォーマッターを作成することも可能です。
+
+```typescript
+import { LogFormatter, LogEntry, LogLevel } from '@squilla/logger-ts';
+
+class CustomFormatter implements LogFormatter {
+  format(entry: LogEntry): string {
+    const level = LogLevel[entry.level];
+    const time = entry.timestamp.toLocaleString('ja-JP');
+    return `${time} [${level}] ${entry.message}`;
+  }
+}
+
+const logger = LoggerFactory.createLogger({
+  format: new CustomFormatter()
+});
+```
+
+### カスタムトランスポートの作成
+
+独自のトランスポートを作成することも可能です。
+
+```typescript
+import { LogTransport, LogLevel } from '@squilla/logger-ts';
+
+class FileTransport implements LogTransport {
+  constructor(private filename: string) {}
+
+  log(formattedMessage: string, level: LogLevel): void {
+    // ファイルに書き込む処理
+    console.log(`ファイル ${this.filename} に書き込み: ${formattedMessage}`);
+  }
+}
+
+const logger = LoggerFactory.createLogger({
+  transport: new FileTransport('app.log')
+});
+```
+
+## 📚 API リファレンス
+
+### LoggerFactory
+
+#### `createLogger(config?: Partial<LoggerConfig>): Logger`
+
+ロガーインスタンスを作成します。
+
+**パラメータ:**
+- `config` (optional): ロガーの設定（部分的な設定も可能）
+
+### Logger
+
+#### `debug(message: string, context?: Record<string, unknown>): void`
+
+DEBUGレベルのログを出力します。
+
+#### `info(message: string, context?: Record<string, unknown>): void`
+
+INFOレベルのログを出力します。
+
+#### `warn(message: string, context?: Record<string, unknown>): void`
+
+WARNレベルのログを出力します。
+
+#### `error(message: string, context?: Record<string, unknown>, error?: Error): void`
+
+ERRORレベルのログを出力します。
+
+### 設定interfaces
+
+#### `LoggerConfig`
+
+```typescript
+interface LoggerConfig {
+  level: LogLevel;
+  format?: LogFormatter;
+  transport?: LogTransport;
+  context?: Record<string, unknown>;
+}
+```
+
+#### `LogEntry`
+
+```typescript
+interface LogEntry {
+  level: LogLevel;
+  timestamp: Date;
+  message: string;
+  context?: Record<string, unknown>;
+  error?: Error;
+}
+```
+
+## 💡 ベストプラクティス
+
+> [!IMPORTANT]
+> 以下のベストプラクティスに従うことで、効果的なログ管理が可能になります。
+
+1. **適切なログレベルの使用**
+   - `DEBUG`: 開発用の詳細情報
+   - `INFO`: 一般的な情報やアプリケーションの状態
+   - `WARN`: 注意すべき事項（エラーではないが要注意）
+   - `ERROR`: 問題やエラーの発生
+
+2. **コンテキスト情報の活用**
+   - トレーサビリティのために関連する情報を含める
+   - ユーザーID、リクエストID、操作名などを記録
+
+3. **本番環境での設定**
+   - 本番環境では適切なログレベル（通常はINFO以上）を設定
+   - 機密情報がログに含まれないよう注意
+
+4. **エラー情報の記録**
+   - try-catchブロックでエラーオブジェクトを適切に記録
+   - エラーの詳細とコンテキストを併せて記録
+
+> [!WARNING]
+> 本番環境では機密情報（パスワード、APIキー、個人情報など）がログに含まれないよう十分注意してください。
+
+## 📄 ライセンス
+
+このプロジェクトは[Apache License 2.0](LICENSE)の下で公開されています。

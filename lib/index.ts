@@ -1,8 +1,9 @@
 /**
- * Add two numbers
- *
- * @param a - The first number
- * @param b - The second number
- * @returns The sum of a and b
+ * Entry point for the logger library.
+ * Exports various factories, formatters, loggers, transports, and type definitions.
  */
-export const add = (a: number, b: number) => a + b;
+export * from './factory';
+export * from './formatters';
+export * from './logger';
+export * from './transports';
+export * from './types';

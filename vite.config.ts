@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/index.ts'),
-      name: 'MyLibrary',
+      name: '@squilla/logger-ts',
       fileName: format => `index.${format}.js`,
       formats: ['es', 'cjs', 'umd'],
     },
@@ -28,7 +28,15 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       include: ['lib/**/*.{ts,tsx}'],
-      exclude: ['node_modules/', 'dist/', 'test/', '**/*.d.ts', '**/*.config.ts', '**/*.config.js'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        'test/',
+        '**/*.d.ts',
+        '**/*.config.ts',
+        '**/*.config.js',
+        'lib/index.ts',
+      ],
     },
     pool: 'forks',
   },

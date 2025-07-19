@@ -1,5 +1,5 @@
 {
-  "name": "@squilla/my-lib",
+  "name": "@squilla/logger-ts",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.cjs.js",
@@ -12,10 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/squillaiugis/library-template"
+    "url": "https://github.com/squillaiugis/logger-ts"
   },
-  "homepage": "https://squillaiugis.github.io/library-template/",
-  "keywords": [],
+  "homepage": "https://squillaiugis.github.io/logger-ts/",
+  "keywords": [
+    "logger",
+    "logging",
+    "typescript",
+    "log",
+    "transport",
+    "formatter",
+    "nodejs",
+    "utility",
+    "ts",
+    "library"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
