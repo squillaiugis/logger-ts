@@ -2,7 +2,7 @@ name: Documentation
 
 on:
   workflow_run:
-    workflows: ["Release"]
+    workflows: ['Release']
     types:
       - completed
     branches:
@@ -32,11 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ 
-            github.event_name == 'workflow_run' && 'main' ||
-            github.event_name == 'workflow_dispatch' && github.ref ||
-            github.head_ref 
-          }}
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.event_name == 'workflow_dispatch' && github.ref || github.head_ref }}
           fetch-depth: 0
 
       - name: Setup Node.js
